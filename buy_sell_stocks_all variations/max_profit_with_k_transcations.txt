@@ -9,7 +9,8 @@ class Solution {
          2. sell then profit[t][d]= prices[d]+Math.max( -prices[x]+ profit[t-1][x]) for all                   0<=x<d
          3. time is O(n^2*k) we can reduce it to O(nk) by reducing the x loop to a variable in             O(1).
          4. base case if k== 0 profit is 0. if we are at d=0 then profit[k][0]=0; 
-         5. algo expert youtube video for explanations */
+         5. algo expert youtube video for explanations 
+*/
         
       
         for( int t=1;t<=k;t++)
