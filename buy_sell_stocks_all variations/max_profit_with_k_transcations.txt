@@ -1,0 +1,25 @@
+class Solution {
+    public int maxProfit(int k, int[] prices) {
+        if( k==0||prices.length==0)
+            return 0;
+        int n=prices.length;
+        int [][] profit= new int [k+1][n];
+        /*two options
+         1. dont sell then profit[t][d]=profit[t][d-1]
+         2. sell then profit[t][d]= prices[d]+Math.max( -prices[x]+ profit[t-1][x]) for all                   0<=x<d
+         3. time is O(n^2*k) we can reduce it to O(nk) by reducing the x loop to a variable in             O(1).
+         4. base case if k== 0 profit is 0. if we are at d=0 then profit[k][0]=0; 
+         5. algo expert youtube video for explanations */
+        
+      
+        for( int t=1;t<=k;t++)
+        {  int maxThusFar=Integer.MIN_VALUE;
+            for( int d=1; d<n ;d++)
+            {
+                maxThusFar=Math.max( maxThusFar,-prices[d-1]+profit[t-1][d-1]);
+                profit[t][d]=Math.max(profit[t][d-1],maxThusFar+prices[d]);//(no sell,sell)
+            }
+        }
+        return profit[k][n-1];
+    }
+}
