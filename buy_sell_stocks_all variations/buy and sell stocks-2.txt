@@ -1,0 +1,51 @@
+ class Solution {
+    public int maxProfit(int[] a) {
+        if( a.length<=1)
+            return 0;
+        int n=a.length;
+        int profit=0;
+        int curpeak=Integer.MIN_VALUE;
+        int curvalley=Integer.MAX_VALUE;
+        boolean buy=false;
+        boolean sell=false;
+        for( int i=0;i<n;i++)
+        {
+  
+            if( i==0)
+            {
+                if( a[i]< a[i+1] )
+                {curvalley=a[i]; buy=true;
+            }
+                if(a[i]==a[i+1]&& buy==false)
+                {  buy=true; curvalley=a[i];}
+            }
+            else if ( i==n-1)
+            {
+                if( a[i]>a[i-1])
+                { curpeak=a[i]; sell=true;
+                }
+                if(a[i]==a[i-1]&&sell==false)
+                {
+                    sell=true;
+                    curpeak=a[i];
+                }
+            }
+            else
+            {
+             if( a[i]>a[i-1]&&a[i]>=a[i+1])
+             { curpeak=a[i];sell=true;}
+                if( a[i]<=a[i-1]&&a[i]<a[i+1])
+                {curvalley=a[i]; buy=true;
+            }}
+            if(  curpeak!=Integer.MIN_VALUE && curvalley!=Integer.MAX_VALUE&& buy&&sell)
+            {
+                profit+=(curpeak-curvalley);
+                buy=false;
+                sell=false;
+            }
+            
+        }
+        
+        return profit;
+    }
+}

@@ -1,0 +1,24 @@
+class Solution {
+    public int maxProfit(int[] a) {
+        // three states possible 
+        //s0 intial we buy at it or take rest
+        //s1 we either sell or take rest.
+        //s2 we have reached here after sell. we take rest and go to s0
+        // in the end we return max of ( s0,s2). bcoz we cant have maxprofit by buying at s1
+        int n=a.length;
+        int[]s0=new int[n];
+        int [] s1= new int[n];
+        int [] s2= new int[n];
+        s0[0]=0;
+        s1[0]=-a[0];
+        s2[0]=0;
+        
+        for( int i=1;i< n;i++)
+        {
+            s0[i]=Math.max( s0[i-1], s2[i-1]);// rest or come from s2
+            s1[i]=Math.max(s1[i-1],s0[i-1] - a[i]);//buy from s0 state or stay at s1
+                s2[i]=s1[i-1]+a[i];
+        }
+        return Math.max( s0[n-1],s2[n-1]);
+    }
+}
