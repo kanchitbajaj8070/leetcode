@@ -1,0 +1,28 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if( prices.length<2||prices==null)
+            return 0;
+        int n= prices.length;
+        int [] mp1= new int [ n];// 1st sell 1 happens on day i(max day of selling is i) or before
+        int [] mp2= new int [n];// 2nd sell happens on day i or after( min day of buying is i)
+        
+            mp1[0]=0;// cant sell on day 1
+        int minvalue=prices[0];
+        for( int i=1;i<n;i++)
+        {
+            minvalue=Math.min( minvalue,prices[i]);
+            mp1[i]=Math.max(mp1[i-1], prices[i]-minvalue);
+        }
+        int maxvalue=prices[n-1];
+        mp2[n-1]=0;//sale cant happen after last day
+        for( int i=n-2;i>=0;i--)
+        {
+            maxvalue=Math.max( maxvalue,prices[i]);
+            mp2[i]=Math.max( maxvalue-prices[i], mp2[i+1]);
+        }
+        int ans=0;
+        for( int i=0;i<n;i++)
+        ans=Math.max( ans, mp1[i]+mp2[i]);
+    return ans;
+    }
+}
