@@ -1,0 +1,18 @@
+   public int spaceoptimisedSolution(int k, int []prices)
+    {int n=prices.length;
+        int [][] profit= new int [2][n];
+     int f=1;// f means use second row . when t=1 we need t-1 row to be all zeros
+     // then we just oscillate f by doing f=f^1; and use vals of f^1 for current iteration
+        for( int t=1;t<=k;t++)
+        {  int maxThusFar=Integer.MIN_VALUE;
+            for( int d=1; d<n ;d++)
+            {
+              maxThusFar=Math.max( maxThusFar,-prices[d-1]+ profit[f^1][d-1]);// max profit if we buy on day i-1 or brfore.
+                profit[f][d]=Math.max(profit[f][d-1],prices[d]+ maxThusFar);
+            
+            }
+         f=f^1;// change 0-> 1 and 1-> 0 alternatively;
+        }
+        return profit[f^1][n-1];// f=f^1 to counter the extra f^1 at t=k when t goes to t+1
+        
+    }
