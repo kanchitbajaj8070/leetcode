@@ -1,0 +1,20 @@
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        if( prices.length<=1)
+            return 0;
+        int n=prices.length;
+             int buy[]= new int[n];//endign with buy
+        int [] sell=new int[n];//ending with sell
+        buy[0]=-prices[0];
+        sell[0]=0;
+        int profit=0;
+for( int i=1;i<n;i++)
+{
+    
+    // either buy a stock(which means imp. to sell befor or on i-1 th day) or hold from previous day.
+    buy[i]=Math.max( sell[i-1] -prices[i],buy[i-1]);
+    sell[i]=Math.max( sell[i-1],buy[i-1]+prices[i]-fee);// take rest or sell which means buying on i-1 or before day and paying the fee .
+}
+        return sell[n-1];
+    }
+}
