@@ -1,0 +1,19 @@
+class Solution {
+    public int jump(int[] nums) {
+      int n=nums.length;
+        if( n<=1)
+            return 0;
+        int [] minjumps= new int [n];
+        Arrays.fill(minjumps,Integer.MAX_VALUE);
+        minjumps[0]=0;
+        for( int i=1;i<n;i++)
+        {
+            for( int j=0;j<i;j++)
+            {
+                if( j+nums[j]>=i)
+                    minjumps[i]=Math.min( minjumps[j]+1,minjumps[i]);
+            }
+        }
+        return minjumps[n-1];
+    }
+}

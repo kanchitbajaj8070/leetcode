@@ -1,0 +1,18 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+        if( nums.length==0||nums==null)
+            return false;
+        if(nums.length==1)
+            return true;
+        int n=nums.length;
+      int maxElementReachableTillNow=0;
+        for( int i=0;i<n-1;i++)
+        {
+        if( maxElementReachableTillNow< i)
+            return false;//happens when we are unable to reach i from previous numbers.
+            maxElementReachableTillNow=Math.max( maxElementReachableTillNow,i+nums[i]);
+            
+    }
+        return true;
+}
+}

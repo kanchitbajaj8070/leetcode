@@ -1,0 +1,22 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+        if( nums.length==0||nums==null)
+            return false;
+        if(nums.length==1)
+            return true;
+int n=nums.length;
+        boolean [] canreach= new boolean[n];
+        for( int i=0;i<n-1;i++)
+        {
+            if( nums[i]==0&&canreach[i+1]==false)
+                return false;
+            else
+            {
+                int temp=nums[i];
+                for( int j=i;j<=i+temp&&j<n;j++)
+                    canreach[j]=true;
+            }
+        }
+        return canreach[n-1];
+    }
+}
