@@ -1,0 +1,27 @@
+class Solution {
+    public int jump(int[] a) {
+    if( a.length<=1)
+        return 0;
+        else
+        {
+        int[] dp=new int[a.length];
+        Arrays.fill(dp,-1);
+   return (solvememo(a,a.length,0,dp));
+        }
+    }
+        public static  int solvememo( int[]a,int n,int i,int [] dp)
+    {
+        if( i>=n-1)
+            return 0;
+        if( dp[i]!=-1)
+            return dp[i];
+            
+        int result=Integer.MAX_VALUE;
+        for (int j = i+1; j <=i+a[i] ; j++) {
+            int rr_ans=1+solvememo(a,n,j,dp);
+            if(rr_ans!=Integer.MAX_VALUE+1)
+            result=Math.min(result,rr_ans);
+        }
+        dp[i]=result;
+        return result;
+    }
